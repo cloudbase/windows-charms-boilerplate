@@ -1,1 +1,0 @@
-Boilerplate for Juju charms on Windows.
