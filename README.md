@@ -1,11 +1,12 @@
-# Windows juju charm boilerplate
+﻿# Windows juju charm boilerplate
 
-This is the boilerplate for a juju charm for windows.
-Departing from this basic structure you will be able to create a juju charm for windows including testing.
-The following is provided:
-* charm helpers.
-* mocked charm helpers for tests.
-* basic required file structure:
+This is a starting template for Windows juju charms.
+By starting with this basic structure you will be able to create a Juju charm for Windows, including unit testing.
+
+The following content is included:
+* Charm helpers.
+* Mocked charm helpers for tests.
+* Minimal file structure:
 ```
 my-windows-charm
 ├── config.yaml
@@ -30,24 +31,24 @@ my-windows-charm
 
 
 #### Usage:
-- Create empty git repo for your charm. 
+- Create an empty git repo for your charm. 
 ```
         git init <path>
 ```
-- set the cloubdase/charmelpers repo as upstream.
+- Set the cloudbase/charmelpers repository as git upstream remote.
 ```
         git remote set-url upstream https://github.com/cloudbase/windows-charm-boilerplate
 ```
-- pull from it
+- Git pull
 ```
         git pull upstream <tagname>
 ```
-- make sure your requirements are met
+- Make sure your requirements are met
 ```
         /path/to/boilerplate/charmRequirements.ps1
 ```
-- **code your charm hooks**: files for the basic hooks are provided as a placeholder for your code and also example files for the relation hooks whose name you will need to change according to your relation names.
-- run the provided basic tests:
+- **code your charm hooks**: Placeholder files for the basic and relation hooks are included. Make sure you change the naming to match your relation names.
+- Run the provided basic tests:
  - Run helper bundled tests (to make sure env is sane):
 ```
         /path/to/boilerplate/runTests.ps1 test_bundled
@@ -56,13 +57,13 @@ my-windows-charm
 ```
 	/path/to/boilerplate/runTests.ps1 test
 ```
-- **code your tests**: To code your own tests we provide a series of mocked functionalities:
+- **Write your own tests**: Here's a set of mocked functionalities that will help in writing unit tests:
  - relation_get: explain
  - relation_set: explain
  - open_port: explain
 
 #### Supported charm hooks formats:
-Windows supports the following executables file formats, in order: 
+Windows supports the following ordered executables file formats: 
 * .ps1
 * .cmd
 * .bat
@@ -71,7 +72,7 @@ Windows supports the following executables file formats, in order:
 This means that given several files with the same name and different extensions only one will be executed and the choice made in that precedence order.
 
 #### Upgrades:
-- To upgrade to a newer version of the windows charm boilerplate just update your repo from upstream:
+- Just do a git pull:
 ```
         git pull upstream <tagname>
 ```
