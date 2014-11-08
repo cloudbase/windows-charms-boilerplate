@@ -1,0 +1,17 @@
+name: <Fill in your charm name>
+summary: <Fill in summary here>
+maintainer: Your Name <your.email@example.com>
+description: |
+  <Multi-line description here>
+categories:
+  - misc
+subordinate: false
+provides:
+  provides-relation:
+    interface: interface-name
+requires:
+  requires-relation:
+    interface: interface-name
+peers:
+  peer-relation:
+    interface: interface-name
