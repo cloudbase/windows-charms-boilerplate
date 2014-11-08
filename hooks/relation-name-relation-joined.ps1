@@ -13,3 +13,11 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
+
+$ErrorActionPreference = 'Stop'
+
+$modulePath = "$PSScriptRoot\main.psm1"
+Import-Module -Force -DisableNameChecking $modulePath
+
+$currentScript = Split-Path -Leaf $MyInvocation.MyCommand.Path
+Main $currentScript

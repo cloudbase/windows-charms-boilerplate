@@ -22,7 +22,7 @@ my-windows-charm
 │   ├── relation-name-relation-departed.ps1
 │   └── relation-name-relation-joined.ps1
 ├── tests
-│   └── main.tests.ps1
+│   └── main.Tests.ps1
 ├── lib
 │   └── Modules
 │       └── CharmHelpers
@@ -30,12 +30,12 @@ my-windows-charm
 │           │   ├── Carbon.Tests.ps1
 │           │   ├── Juju.Tests.ps1
 │           │   ├── Utils.Tests.ps1
-│	        │   └── Windows.Tests.ps1
-│	        ├── CharmHelpers.psd1
-│	        ├── Carbon.psm1
-│       	├── Juju.psm1
-│   	    ├── Utils.psm1
-│	        └── Windows.psm1
+│           │   └── Windows.Tests.ps1
+│           ├── CharmHelpers.psd1
+│           ├── Carbon.psm1
+│           ├── Juju.psm1
+│           ├── Utils.psm1
+│           └── Windows.psm1
 ├── icon.svg
 ├── metadata.yaml
 ├── get-requirements.ps1
@@ -50,9 +50,9 @@ my-windows-charm
 ```
         git init <path>
 ```
-- Set the cloudbase/charmelpers repository as git upstream remote.
+- Set the cloudbase/windows-charms-boilerplate repository as git upstream remote.
 ```
-        git remote set-url upstream https://github.com/cloudbase/windows-charm-boilerplate
+        git remote set-url upstream https://github.com/cloudbase/windows-charms-boilerplate
 ```
 - Git pull
 ```
@@ -70,7 +70,7 @@ my-windows-charm
 ```
  - Run hooks tests.
 ```
-       /path/to/boilerplate/Run-Tests.ps1 CharmMainModule
+       /path/to/boilerplate/run-tests.ps1 CharmMainModule
 ```
 - **Write your own tests**: Here's a set of mocked functionalities that will help in writing unit tests:
  - relation_get: explain

@@ -61,7 +61,3 @@ if ($TestModule -ne $testTypeCharmHelpersModules -and $TestModule -ne $testTypeC
         TestIn-Path $mainModuleTestPath $pesterModulePath
     }
 }
-
-
-
-

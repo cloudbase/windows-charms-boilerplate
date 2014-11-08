@@ -13,3 +13,17 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
+
+
+$charmHelpers = Resolve-Path "..\lib\Modules\CharmHelpers"
+Import-Module -Force -DisableNameChecking $charmHelpers
+
+function Main {
+    param(
+        [string]$Argument
+    )
+
+    Write-JujuLog "Running $Argument"
+}
+
+Export-ModuleMember -Function Main
