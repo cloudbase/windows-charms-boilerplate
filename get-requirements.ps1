@@ -85,7 +85,7 @@ function Main() {
     $pesterArchive = $pesterArchiveRoot + $pesterStableCommitId + ".zip"
 
     $tempPesterZip = "$env:Temp\pester.zip"
-    $pesterModulePath = Resolve-Path "./lib/Modules"
+    $pesterModulePath = Join-Path $Env:Temp "Modules"
 
     if (!(Test-Path $pesterModulePath)) {
         Log "Creating path $pesterModulePath"

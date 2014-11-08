@@ -24,10 +24,9 @@ function Log {
 
 function TestIn-Path {
     param($path=".",
-          $pesterPath=".\lib\Modules")
+          $pesterFullPath=".\lib\Modules")
 
     $fullPath = Resolve-Path $path
-    $pesterFullPath = Resolve-Path $pesterPath
     $initialPSModulePath = $env:PSModulePath
     $env:PSModulePath = $env:PSModulePath + ";$pesterFullPath"
     
@@ -48,15 +47,16 @@ $testTypeCharmHelpersModules = "CharmHelpers"
 $charmHelpersTestPath = ".\lib\Modules\CharmHelpers\Tests"
 $testTypeCharmMainModule = "CharmMainModule"
 $mainModuleTestPath = ".\Tests"
+$pesterModulePath = Join-Path $Env:Temp "Modules"
 
 if ($TestModule -ne $testTypeCharmHelpersModules -and $TestModule -ne $testTypeCharmMainModule) {
     throw "The test module should be '$testTypeCharmHelpersModules' or '$testTypeCharmMainModule'"
 } else {
     if ($TestModule -eq $testTypeCharmHelpersModules) {
-        TestIn-Path $charmHelpersTestPath
+        TestIn-Path $charmHelpersTestPath $pesterModulePath
     }
     if ($TestModule -eq $testTypeCharmMainModule) {
-        TestIn-Path $mainModuleTestPath
+        TestIn-Path $mainModuleTestPath $pesterModulePath
     }
 }
 
