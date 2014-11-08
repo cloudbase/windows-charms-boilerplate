@@ -76,7 +76,9 @@ function ExecuteWith-Retry {
 }
 
 function Log($message) {
-    Write-Host $message
+    if ($logEnabled) {
+        Write-Host $message
+    }
 }
 
 function Main() {
@@ -84,8 +86,9 @@ function Main() {
     $pesterStableCommitId = "3a5e7f5d1bb516f8c18dd3e530ee90e5f12578db"
     $pesterArchive = $pesterArchiveRoot + $pesterStableCommitId + ".zip"
 
-    $tempPesterZip = "$env:Temp\pester.zip"
+    $tempPesterZip = Join-Path $Env:Temp "pester.zip"
     $pesterModulePath = Join-Path $Env:Temp "Modules"
+    $pesterFinalPath = Join-Path $pesterModulePath "Pester"
 
     if (!(Test-Path $pesterModulePath)) {
         Log "Creating path $pesterModulePath"
@@ -95,9 +98,13 @@ function Main() {
     Download-File $pesterArchive $tempPesterZip
 
     Unzip-File $tempPesterZip $pesterModulePath
+    Remove-Item -force $tempPesterZip
 
-    Move-Item -Force (Join-Path $pesterModulePath ("Pester-" + $pesterStableCommitId)) `
-        (Join-Path $pesterModulePath "Pester")
+    if (Test-Path $pesterFinalPath) {
+        Log $pesterFinalPath
+        Remove-Item -Recurse -Force $pesterFinalPath
+    }
+    Move-Item -Force (Join-Path $pesterModulePath ("Pester-" + $pesterStableCommitId)) $pesterFinalPath
 }
 
 Main
