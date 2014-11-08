@@ -13,3 +13,31 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
+
+$modulePath = (Resolve-Path "..\hooks\main.psm1").Path
+$moduleName = $modulePath.Split('\')[-1].Split('.')[0]
+Import-Module $modulePath
+
+InModuleScope $moduleName {
+    # Describe block of the function to be tested
+    Describe "Main" {
+        # Test case when function execution has no errors
+        Context "Main function is executed successfully" {
+            Mock Write-JujuLog { }
+
+            $fakeArg = "Fake Argument"
+            # Call the function with fake  once with are done with mocking
+            Main $fakeArg
+
+            # Check if the mock was called with the correct parameters
+            It "should write a message on the stdout" {
+                $expectedMsg = "Running $fakeArg"
+                Assert-MockCalled Write-JujuLog -Exactly 1 -ParameterFilter {
+                    ($Message -eq $expectedMsg)
+                }
+            }
+        }
+    }
+}
+
+Remove-Module $moduleName
