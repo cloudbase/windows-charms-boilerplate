@@ -62,7 +62,7 @@ my-windows-charm
 ```
         /path/to/boilerplate/get-requirements.ps1
 ```
-- **Code your charm hooks**: Placeholder files for the basic and relation hooks are included. Make sure you change the naming to match your relation names.
+- **Code your charm hooks**: Placeholder files for the basic and relation hooks are included. Make sure you change the naming to match your relation names. We recommend writing all the business logic in the main.psm1 and export the functions to be used in every hook.
 - Run the provided basic tests:
  - Run helper bundled tests (to make sure env is sane):
 ```
@@ -72,10 +72,7 @@ my-windows-charm
 ```
        /path/to/boilerplate/run-tests.ps1 CharmMainModule
 ```
-- **Write your own tests**: Here's a set of mocked functionalities that will help in writing unit tests:
- - relation_get: explain
- - relation_set: explain
- - open_port: explain
+- **Write your own tests**: Unit tests are written using Pester PowerShell unit testing framework. https://github.com/pester/Pester
 
 #### Supported charm hooks formats:
 Windows supports the following ordered executables file formats:
