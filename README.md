@@ -23,21 +23,25 @@ my-windows-charm
 │   └── relation-name-relation-joined.ps1
 ├── tests
 │   └── main.tests.ps1
-├── modules
-│   └── charm-helpers
-│       ├── tests
-│       │   ├── carbon.tests.ps1
-│       │   ├── juju.tests.ps1
-│       │   ├── utils.tests.ps1
-│       │   └── windows.tests.ps1
-│       ├── CharmHelpers.psd1
-│       ├── carbon.psm1
-│       ├── juju.psm1
-│       ├── utils.psm1
-│       └── windows.psm1
+├── lib
+│   └── Modules
+│       └── CharmHelpers
+│           ├── Tests
+│           │   ├── Carbon.Tests.ps1
+│           │   ├── Juju.Tests.ps1
+│           │   ├── Utils.Tests.ps1
+│	        │   └── Windows.Tests.ps1
+│	        ├── CharmHelpers.psd1
+│	        ├── Carbon.psm1
+│       	├── Juju.psm1
+│   	    ├── Utils.psm1
+│	        └── Windows.psm1
 ├── icon.svg
 ├── metadata.yaml
+├── get-requirements.ps1
+├── run-tests.ps1
 └── README.ex
+
 ```
 
 
@@ -54,19 +58,19 @@ my-windows-charm
 ```
         git pull upstream <tagname>
 ```
-- Make sure your requirements are met
+- Make sure your requirements are met. The following script downloads Pester in the Modules folder.
 ```
-        /path/to/boilerplate/charmRequirements.ps1
+        /path/to/boilerplate/get-requirements.ps1
 ```
 - **Code your charm hooks**: Placeholder files for the basic and relation hooks are included. Make sure you change the naming to match your relation names.
 - Run the provided basic tests:
  - Run helper bundled tests (to make sure env is sane):
 ```
-        /path/to/boilerplate/runTests.ps1 test_bundled
+        /path/to/boilerplate/run-tests.ps1 CharmHelpers
 ```
  - Run hooks tests.
 ```
-       /path/to/boilerplate/runTests.ps1 test
+       /path/to/boilerplate/Run-Tests.ps1 CharmMainModule
 ```
 - **Write your own tests**: Here's a set of mocked functionalities that will help in writing unit tests:
  - relation_get: explain

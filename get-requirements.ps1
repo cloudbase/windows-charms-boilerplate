@@ -14,6 +14,8 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+$ErrorActionPreference = "Stop"
+
 function Unzip-File {
     param(
         [Parameter(Mandatory=$true)]
@@ -82,17 +84,17 @@ function Main() {
     $pesterStableCommitId = "3a5e7f5d1bb516f8c18dd3e530ee90e5f12578db"
     $pesterArchive = $pesterArchiveRoot + $pesterStableCommitId + ".zip"
 
-    $tempPesterZip = "$env:Temp\pester.zip"  
-    $pesterModulePath = Join-Path (Resolve-Path ".").Path "Modules"
+    $tempPesterZip = "$env:Temp\pester.zip"
+    $pesterModulePath = Resolve-Path "./lib/Modules"
 
     if (!(Test-Path $pesterModulePath)) {
         Log "Creating path $pesterModulePath"
-        mkdir $pesterModulePath -Force   
+        mkdir $pesterModulePath -Force
     }
 
-    Download-File $pesterArchive $tempPesterZip 
+    Download-File $pesterArchive $tempPesterZip
 
-    Unzip-File $tempPesterZip $pesterModulePath    
+    Unzip-File $tempPesterZip $pesterModulePath
 
     Move-Item -Force (Join-Path $pesterModulePath ("Pester-" + $pesterStableCommitId)) `
         (Join-Path $pesterModulePath "Pester")
