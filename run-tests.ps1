@@ -29,16 +29,18 @@ function TestIn-Path {
     $fullPath = Resolve-Path $path
     $initialPSModulePath = $env:PSModulePath
     $env:PSModulePath = $env:PSModulePath + ";$pesterFullPath"
-    
+    $initialExecutionPolicy = Get-ExecutionPolicy
     try {
         Log "Executing tests in the folder $fullPath"
         pushd $fullPath
+        Set-ExecutionPolicy Bypass -Scope CurrentUser
         Invoke-Pester
     } catch {
         Log "Tests have failed."
         Log $_.Exception.ToString()
     } finally {
         popd
+        Set-ExecutionPolicy $initialExecutionPolicy -Scope CurrentUser
         $env:PSModulePath = $initialPSModulePath
     }
 } 
