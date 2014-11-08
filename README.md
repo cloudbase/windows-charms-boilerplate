@@ -87,3 +87,11 @@ This means that given several files with the same name and different extensions 
 ```
         git pull upstream <tagname>
 ```
+
+### Caveats:
+- Since charm installer runs as a service we can only charm software whose installer does not require gui:
+Typically you can achieve this by using /quiet or /q and on ocasions /n (which stands for non interactive).
+- Installers comes in two ways:
+ - MSI installers: Have a pre-defined interface and you use MSIExec (a binary available in all windows versions and flavors) to install.
+ - Binary installers (.exe files) implement their own flags, most of them implement the same as flags than (they can be found running `<yourinstaller>.exe /?`)
+- To use pester the test runner script will temporarily set an unrestricted execution policy for the duration of its run since pester is not an oficially signed library.
