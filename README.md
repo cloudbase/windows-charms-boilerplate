@@ -23,19 +23,6 @@ my-windows-charm
 │   └── relation-name-relation-joined.ps1
 ├── tests
 │   └── main.Tests.ps1
-├── lib
-│   └── Modules
-│       └── CharmHelpers
-│           ├── Tests
-│           │   ├── Carbon.Tests.ps1
-│           │   ├── Juju.Tests.ps1
-│           │   ├── Utils.Tests.ps1
-│           │   └── Windows.Tests.ps1
-│           ├── CharmHelpers.psd1
-│           ├── Carbon.psm1
-│           ├── Juju.psm1
-│           ├── Utils.psm1
-│           └── Windows.psm1
 ├── icon.svg
 ├── metadata.yaml
 ├── get-requirements.ps1
@@ -73,6 +60,12 @@ my-windows-charm
        /path/to/boilerplate/run-tests.ps1 CharmMainModule
 ```
 - **Write your own tests**: Unit tests are written using Pester PowerShell unit testing framework. https://github.com/pester/Pester
+
+#### Charm Helpers:
+- By default, Juju adds $env:CHARM_DIR\hooks\Modules and $env:CHARM_DIR\lib\Modules in $env:PSModulePath. So you can simply write a module, bundle it with your charm, and simply do an Import-Module in your hooks.
+- The Powershell CharmHelpers Module can be found in this repo:
+ - https://github.com/cloudbase/juju-powershell-modules
+- The content of the repo should be put in my-windows-charm\hooks\Modules folder for juju version 1.21 or in my-windows-charm\lib\Modules folder for Juju version 1.22 and higher.
 
 #### Supported charm hooks formats:
 Windows supports the following ordered executables file formats:

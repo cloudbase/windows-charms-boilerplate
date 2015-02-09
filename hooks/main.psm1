@@ -15,15 +15,12 @@
 #    under the License.
 
 
-$charmHelpers = Resolve-Path "..\lib\Modules\CharmHelpers"
-Import-Module -Force -DisableNameChecking $charmHelpers
-
 function Main {
     param(
         [string]$Argument
     )
 
-    Write-JujuLog "Running $Argument"
+    juju-log.exe "Running $Argument"
 }
 
 Export-ModuleMember -Function Main
