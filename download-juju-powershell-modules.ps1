@@ -1,4 +1,4 @@
-#!/bin/bash
+#ps1_sysnative
 
 # Copyright 2014 Cloudbase Solutions Srl
 #
@@ -14,13 +14,13 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-set -e
+$ErrorActionPreference = "Stop"
 
-user="cloudbase"
-repo="juju-powershell-modules"
-branch="master"
-copy_path_juju121="hooks/Modules/"
-copy_path_juju122="lib/Modules"
+$user="cloudbase"
+$repo="juju-powershell-modules"
+$branch="master"
+$copy_path_juju121="hooks/Modules/"
+$copy_path_juju122="lib/Modules"
 
 git clone https://github.com/$user"/"$repo".git"
 
@@ -28,10 +28,10 @@ pushd $repo
 git checkout $branch
 popd
 
-mkdir -p $copy_path_juju121
-mkdir -p $copy_path_juju122
+mkdir $copy_path_juju121
+mkdir $copy_path_juju122
 
-cp -r $repo/CharmHelpers $copy_path_juju121
-cp -r $repo/CharmHelpers $copy_path_juju122
+cp -recurse $repo/CharmHelpers $copy_path_juju121
+cp -recurse $repo/CharmHelpers $copy_path_juju122
 
-rm -rf $repo
+rm -recurse -force $repo
