@@ -16,8 +16,18 @@
 
 $ErrorActionPreference = 'Stop'
 
-$modulePath = "$PSScriptRoot\main.psm1"
-Import-Module -Force -DisableNameChecking $modulePath
+try {
+    $modulePath = "$PSScriptRoot\main.psm1"
+    Import-Module -Force -DisableNameChecking $modulePath
+} catch {
+    juju-log.exe "Error while loading modules: $_.Exception.Message"
+    exit 1
+}
 
-$currentScript = Split-Path -Leaf $MyInvocation.MyCommand.Path
-Main $currentScript
+
+try {
+    Main
+} catch {
+    juju-log.exe "Error while running main script: $_.Exception.Message"
+    exit 1
+}

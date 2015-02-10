@@ -14,11 +14,24 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+$ErrorActionPreference = "Stop"
 
-function Main {
-    param()
+$user="cloudbase"
+$repo="juju-powershell-modules"
+$branch="master"
+$copy_path_juju121="hooks/Modules/"
+$copy_path_juju122="lib/Modules"
 
-    juju-log.exe "Hello world!"
-}
+git clone https://github.com/$user"/"$repo".git"
 
-Export-ModuleMember -Function Main
+pushd $repo
+git checkout $branch
+popd
+
+mkdir $copy_path_juju121
+mkdir $copy_path_juju122
+
+cp -recurse $repo/CharmHelpers $copy_path_juju121
+cp -recurse $repo/CharmHelpers $copy_path_juju122
+
+rm -recurse -force $repo
