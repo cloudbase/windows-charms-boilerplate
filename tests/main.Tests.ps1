@@ -19,22 +19,17 @@ $moduleName = $modulePath.Split('\')[-1].Split('.')[0]
 Import-Module $modulePath
 
 InModuleScope $moduleName {
+
     # Describe block of the function to be tested
     Describe "Main" {
         # Test case when function execution has no errors
         Context "Main function is executed successfully" {
-            Mock Write-JujuLog { }
+            Mock juju-log.exe { } -Verifiable
 
-            $fakeArg = "Fake Argument"
-            # Call the function with fake  once with are done with mocking
-            Main $fakeArg
+            Main
 
-            # Check if the mock was called with the correct parameters
-            It "should write a message on the stdout" {
-                $expectedMsg = "Running $fakeArg"
-                Assert-MockCalled Write-JujuLog -Exactly 1 -ParameterFilter {
-                    ($Message -eq $expectedMsg)
-                }
+            It "should call the juju logger" {
+                Assert-VerifiableMocks
             }
         }
     }

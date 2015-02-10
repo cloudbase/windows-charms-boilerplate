@@ -14,7 +14,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-param($TestModule="CharmHelpers")
+param($TestModule="CharmMainModule")
 $ErrorActionPreference = "Stop"
 
 function Log {
