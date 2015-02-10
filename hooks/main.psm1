@@ -16,11 +16,9 @@
 
 
 function Main {
-    param(
-        [string]$Argument
-    )
+    param()
 
-    juju-log.exe "Running $Argument"
+    juju-log.exe "Hello world!"
 }
 
 Export-ModuleMember -Function Main
