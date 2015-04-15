@@ -16,22 +16,30 @@
 
 set -e
 
-user="cloudbase"
-repo="juju-powershell-modules"
-branch="master"
-copy_path_juju121="hooks/Modules/"
-copy_path_juju122="lib/Modules"
+# Get the following CharmHelpers version:
+CHARM_HELPERS_GIT_COMMIT="1fae7240ef29154b666fdac8c85a8fc47e90a356"
 
-git clone https://github.com/$user"/"$repo".git"
+REPO_NAME="juju-powershell-modules"
+REPO_URL="https://github.com/cloudbase/${REPO_NAME}.git"
 
-pushd $repo
-git checkout $branch
+CHARM_HELPERS_PATH="hooks/Modules/"
+CHARM_HELPERS_FOLDER_NAME="CharmHelpers"
+
+if [ -d "$REPO_NAME" ]; then
+    rm -rf $REPO_NAME
+fi
+git clone $REPO_URL
+
+pushd $REPO_NAME
+git reset --hard $CHARM_HELPERS_GIT_COMMIT
 popd
 
-mkdir -p $copy_path_juju121
-mkdir -p $copy_path_juju122
+if [ -d "$CHARM_HELPERS_PATH/$CHARM_HELPERS_FOLDER_NAME" ]; then
+    rm -rf "$CHARM_HELPERS_PATH/$CHARM_HELPERS_FOLDER_NAME"
+else
+    mkdir -p $CHARM_HELPERS_PATH
+fi
 
-cp -r $repo/CharmHelpers $copy_path_juju121
-cp -r $repo/CharmHelpers $copy_path_juju122
+cp -r "$REPO_NAME/$CHARM_HELPERS_FOLDER_NAME" $CHARM_HELPERS_PATH
 
-rm -rf $repo
+rm -rf $REPO_NAME
