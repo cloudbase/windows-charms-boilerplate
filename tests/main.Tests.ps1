@@ -16,17 +16,121 @@
 
 $modulePath = (Resolve-Path "..\hooks\main.psm1").Path
 $moduleName = $modulePath.Split('\')[-1].Split('.')[0]
-Import-Module $modulePath
+Import-Module $modulePath -Force -DisableNameChecking
 
 InModuleScope $moduleName {
 
     # Describe block of the function to be tested
-    Describe "Main" {
+    Describe "Run-InstallHook" {
         # Test case when function execution has no errors
         Context "Main function is executed successfully" {
-            Mock juju-log.exe { } -Verifiable
+           Mock juju-log.exe { } -Verifiable
 
-            Main
+            Run-InstallHook
+
+            It "should call the juju logger" {
+                Assert-VerifiableMocks
+            }
+        }
+    }
+
+    Describe "Run-StartHook" {
+        # Test case when function execution has no errors
+        Context "Main function is executed successfully" {
+           Mock juju-log.exe { } -Verifiable
+
+            Run-StartHook
+
+            It "should call the juju logger" {
+                Assert-VerifiableMocks
+            }
+        }
+    }
+
+    Describe "Run-ConfigChangedHook" {
+        # Test case when function execution has no errors
+        Context "Main function is executed successfully" {
+           Mock juju-log.exe { } -Verifiable
+
+            Run-ConfigChangedHook
+
+            It "should call the juju logger" {
+                Assert-VerifiableMocks
+            }
+        }
+    }
+
+    Describe "Run-UpgradeHook" {
+        # Test case when function execution has no errors
+        Context "Main function is executed successfully" {
+           Mock juju-log.exe { } -Verifiable
+
+            Run-UpgradeHook
+
+            It "should call the juju logger" {
+                Assert-VerifiableMocks
+            }
+        }
+    }
+
+    Describe "Run-StopHook" {
+        # Test case when function execution has no errors
+        Context "Main function is executed successfully" {
+           Mock juju-log.exe { } -Verifiable
+
+            Run-StopHook
+
+            It "should call the juju logger" {
+                Assert-VerifiableMocks
+            }
+        }
+    }
+
+    Describe "Run-RelationNameJoinedHook" {
+        # Test case when function execution has no errors
+        Context "Main function is executed successfully" {
+           Mock juju-log.exe { } -Verifiable
+
+            Run-RelationNameJoinedHook
+
+            It "should call the juju logger" {
+                Assert-VerifiableMocks
+            }
+        }
+    }
+
+    Describe "Run-RelationNameChangedHook" {
+        # Test case when function execution has no errors
+        Context "Main function is executed successfully" {
+           Mock juju-log.exe { } -Verifiable
+
+            Run-RelationNameChangedHook
+
+            It "should call the juju logger" {
+                Assert-VerifiableMocks
+            }
+        }
+    }
+
+    Describe "Run-RelationNameDepartedHook" {
+        # Test case when function execution has no errors
+        Context "Main function is executed successfully" {
+           Mock juju-log.exe { } -Verifiable
+
+            Run-RelationNameDepartedHook
+
+            It "should call the juju logger" {
+                Assert-VerifiableMocks
+            }
+        }
+    }
+
+    Describe "Run-RelationNameBrokenHook" {
+        # Test case when function execution has no errors
+        Context "Main function is executed successfully" {
+           Mock juju-log.exe { } -Verifiable
+
+            Run-RelationNameBrokenHook
 
             It "should call the juju logger" {
                 Assert-VerifiableMocks
