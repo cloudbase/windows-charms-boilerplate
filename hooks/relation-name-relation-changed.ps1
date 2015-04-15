@@ -26,7 +26,7 @@ try {
 
 
 try {
-    Main
+    Run-RelationNameChangedHook
 } catch {
     juju-log.exe "Error while running main script: $_.Exception.Message"
     exit 1
