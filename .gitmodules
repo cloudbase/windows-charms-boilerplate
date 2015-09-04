@@ -1,0 +1,3 @@
+[submodule "lib/Modules"]
+	path = lib/Modules
+	url = https://github.com/cloudbase/juju-powershell-modules.git
