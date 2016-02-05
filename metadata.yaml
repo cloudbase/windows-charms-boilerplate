@@ -3,7 +3,7 @@ summary: <Fill in summary here>
 maintainer: Your Name <your.email@example.com>
 description: |
   <Multi-line description here>
-categories:
+tags:
   - misc
 subordinate: false
 provides:
