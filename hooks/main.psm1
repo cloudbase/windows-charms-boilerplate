@@ -1,6 +1,4 @@
-#ps1_sysnative
-
-# Copyright 2014 Cloudbase Solutions Srl
+# Copyright 2016 Cloudbase Solutions Srl
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
 #    not use this file except in compliance with the License. You may obtain
@@ -15,66 +13,53 @@
 #    under the License.
 
 
-function Run-InstallHook {
-    Param()
+Import-Module JujuLogging
 
-    juju-log.exe "Running install hook."
+
+function Invoke-InstallHook {
+    Write-JujuWarning "Running install hook."
 }
 
-function Run-StartHook {
-    Param()
-
-    juju-log.exe "Running start hook."
+function Invoke-ConfigChangedHook {
+    Write-JujuWarning "Running config changed hook."
 }
 
-function Run-ConfigChangedHook {
-    Param()
-
-    juju-log.exe "Running config changed hook."
+function Invoke-UpgradeHook {
+    Write-JujuWarning "Running upgrade hook."
 }
 
-function Run-UpgradeHook {
-    Param()
-
-    juju-log.exe "Running upgrade hook."
+function Invoke-StartHook {
+    Write-JujuWarning "Running start hook."
 }
 
-function Run-StopHook {
-    Param()
-
-    juju-log.exe "Running stop hook."
+function Invoke-StopHook {
+    Write-JujuWarning "Running stop hook."
 }
 
-function Run-RelationNameJoinedHook {
-    Param()
-
-    juju-log.exe "Running relationName joined hook."
+function Invoke-RelationNameJoinedHook {
+    Write-JujuWarning "Running relationName joined hook."
 }
 
-function Run-RelationNameChangedHook {
-    Param()
-
-    juju-log.exe "Running relationName changed hook."
+function Invoke-RelationNameChangedHook {
+    Write-JujuWarning "Running relationName changed hook."
 }
 
-function Run-RelationNameDepartedHook {
-    Param()
-
-    juju-log.exe "Running relationName departed hook."
+function Invoke-RelationNameDepartedHook {
+    Write-JujuWarning "Running relationName departed hook."
 }
 
-function Run-RelationNameBrokenHook {
-    Param()
-
-    juju-log.exe "Running relationName broken hook."
+function Invoke-RelationNameBrokenHook {
+    Write-JujuWarning "Running relationName broken hook."
 }
 
-Export-ModuleMember -Function Run-InstallHook
-Export-ModuleMember -Function Run-StartHook
-Export-ModuleMember -Function Run-ConfigChangedHook
-Export-ModuleMember -Function Run-UpgradeHook
-Export-ModuleMember -Function Run-StopHook
-Export-ModuleMember -Function Run-RelationNameJoinedHook
-Export-ModuleMember -Function Run-RelationNameChangedHook
-Export-ModuleMember -Function Run-RelationNameDepartedHook
-Export-ModuleMember -Function Run-RelationNameBrokenHook
+Export-ModuleMember -Function @(
+    'Invoke-InstallHook',
+    'Invoke-ConfigChangedHook',
+    'Invoke-UpgradeHook',
+    'Invoke-StartHook',
+    'Invoke-StopHook',
+    'Invoke-RelationNameJoinedHook',
+    'Invoke-RelationNameChangedHook',
+    'Invoke-RelationNameDepartedHook',
+    'Invoke-RelationNameBrokenHook'
+)
