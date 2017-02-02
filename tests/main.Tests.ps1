@@ -1,5 +1,3 @@
-#ps1_sysnative
-
 # Copyright 2014 Cloudbase Solutions Srl
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -14,19 +12,22 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-$modulePath = (Resolve-Path "..\hooks\main.psm1").Path
-$moduleName = $modulePath.Split('\')[-1].Split('.')[0]
-Import-Module $modulePath -Force -DisableNameChecking
+$testsDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$charmDir = Split-Path -Parent $testsDir
+$moduleName = "main"
+$modulePath = Join-Path $charmDir "hooks\${moduleName}.psm1"
+
+Import-Module $modulePath
+
 
 InModuleScope $moduleName {
-
     # Describe block of the function to be tested
-    Describe "Run-InstallHook" {
+    Describe "Invoke-InstallHook" {
         # Test case when function execution has no errors
         Context "Main function is executed successfully" {
-           Mock juju-log.exe { } -Verifiable
+            Mock Write-JujuWarning { } -Verifiable
 
-            Run-InstallHook
+            Invoke-InstallHook
 
             It "should call the juju logger" {
                 Assert-VerifiableMocks
@@ -34,12 +35,12 @@ InModuleScope $moduleName {
         }
     }
 
-    Describe "Run-StartHook" {
+    Describe "Invoke-StartHook" {
         # Test case when function execution has no errors
         Context "Main function is executed successfully" {
-           Mock juju-log.exe { } -Verifiable
+            Mock Write-JujuWarning { } -Verifiable
 
-            Run-StartHook
+            Invoke-StartHook
 
             It "should call the juju logger" {
                 Assert-VerifiableMocks
@@ -47,12 +48,12 @@ InModuleScope $moduleName {
         }
     }
 
-    Describe "Run-ConfigChangedHook" {
+    Describe "Invoke-ConfigChangedHook" {
         # Test case when function execution has no errors
         Context "Main function is executed successfully" {
-           Mock juju-log.exe { } -Verifiable
+            Mock Write-JujuWarning { } -Verifiable
 
-            Run-ConfigChangedHook
+            Invoke-ConfigChangedHook
 
             It "should call the juju logger" {
                 Assert-VerifiableMocks
@@ -60,12 +61,12 @@ InModuleScope $moduleName {
         }
     }
 
-    Describe "Run-UpgradeHook" {
+    Describe "Invoke-UpgradeHook" {
         # Test case when function execution has no errors
         Context "Main function is executed successfully" {
-           Mock juju-log.exe { } -Verifiable
+            Mock Write-JujuWarning { } -Verifiable
 
-            Run-UpgradeHook
+            Invoke-UpgradeHook
 
             It "should call the juju logger" {
                 Assert-VerifiableMocks
@@ -73,12 +74,12 @@ InModuleScope $moduleName {
         }
     }
 
-    Describe "Run-StopHook" {
+    Describe "Invoke-StopHook" {
         # Test case when function execution has no errors
         Context "Main function is executed successfully" {
-           Mock juju-log.exe { } -Verifiable
+            Mock Write-JujuWarning { } -Verifiable
 
-            Run-StopHook
+            Invoke-StopHook
 
             It "should call the juju logger" {
                 Assert-VerifiableMocks
@@ -86,12 +87,12 @@ InModuleScope $moduleName {
         }
     }
 
-    Describe "Run-RelationNameJoinedHook" {
+    Describe "Invoke-RelationNameJoinedHook" {
         # Test case when function execution has no errors
         Context "Main function is executed successfully" {
-           Mock juju-log.exe { } -Verifiable
+            Mock Write-JujuWarning { } -Verifiable
 
-            Run-RelationNameJoinedHook
+            Invoke-RelationNameJoinedHook
 
             It "should call the juju logger" {
                 Assert-VerifiableMocks
@@ -99,12 +100,12 @@ InModuleScope $moduleName {
         }
     }
 
-    Describe "Run-RelationNameChangedHook" {
+    Describe "Invoke-RelationNameChangedHook" {
         # Test case when function execution has no errors
         Context "Main function is executed successfully" {
-           Mock juju-log.exe { } -Verifiable
+            Mock Write-JujuWarning { } -Verifiable
 
-            Run-RelationNameChangedHook
+            Invoke-RelationNameChangedHook
 
             It "should call the juju logger" {
                 Assert-VerifiableMocks
@@ -112,12 +113,12 @@ InModuleScope $moduleName {
         }
     }
 
-    Describe "Run-RelationNameDepartedHook" {
+    Describe "Invoke-RelationNameDepartedHook" {
         # Test case when function execution has no errors
         Context "Main function is executed successfully" {
-           Mock juju-log.exe { } -Verifiable
+            Mock Write-JujuWarning { } -Verifiable
 
-            Run-RelationNameDepartedHook
+            Invoke-RelationNameDepartedHook
 
             It "should call the juju logger" {
                 Assert-VerifiableMocks
@@ -125,12 +126,12 @@ InModuleScope $moduleName {
         }
     }
 
-    Describe "Run-RelationNameBrokenHook" {
+    Describe "Invoke-RelationNameBrokenHook" {
         # Test case when function execution has no errors
         Context "Main function is executed successfully" {
-           Mock juju-log.exe { } -Verifiable
+            Mock Write-JujuWarning { } -Verifiable
 
-            Run-RelationNameBrokenHook
+            Invoke-RelationNameBrokenHook
 
             It "should call the juju logger" {
                 Assert-VerifiableMocks

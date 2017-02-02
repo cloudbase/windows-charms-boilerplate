@@ -1,5 +1,3 @@
-#ps1_sysnative
-
 # Copyright 2014 Cloudbase Solutions Srl
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -13,21 +11,19 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
+#
 
 $ErrorActionPreference = 'Stop'
 
-try {
-    $modulePath = "$PSScriptRoot\main.psm1"
-    Import-Module -Force -DisableNameChecking $modulePath
-} catch {
-    juju-log.exe "Error while loading modules: $_.Exception.Message"
-    exit 1
-}
+Import-Module JujuLogging
 
 
 try {
-    Run-RelationNameBrokenHook
+    $mainModule = Join-Path ${env:CHARM_DIR} "hooks\main.psm1"
+    Import-Module $mainModule
+
+    Invoke-RelationNameBrokenHook
 } catch {
-    juju-log.exe "Error while running main script: $_.Exception.Message"
+    Write-HookTracebackToLog $_
     exit 1
 }

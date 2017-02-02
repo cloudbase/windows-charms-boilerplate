@@ -6,6 +6,13 @@ description: |
 tags:
   - misc
 subordinate: false
+series:
+  - win2012
+  - win2012r2
+  - win2012hv
+  - win2012hvr2
+  - win2016
+  - win2016nano
 provides:
   provides-relation:
     interface: interface-name
